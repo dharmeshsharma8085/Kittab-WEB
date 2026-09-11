@@ -34,7 +34,7 @@ jobs:
       - name: Validate Python Syntax & Import Safety
         run: |
           python -m py_compile app.py
-          python -c "import streamlit, openai, chromadb, pypdf; print('All core modules loaded successfully')"
+          python -c "import streamlit, openai, chromadb, PyPDF2; print('All core modules loaded successfully')"
 
       - name: Smoke Test Streamlit Entrypoint
         env:
