@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  kittab:
+    build: .
+    container_name: kittab_app
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o-mini}
+    volumes:
+      - kittab_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  kittab_data:

@@ -1,0 +1,32 @@
+name: KITTAB Deployment
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+# NOTE FOR GITHUB PAGES:
+# GitHub Pages is a static file host (HTML/CSS/JS) and cannot run Python 3.11 or Streamlit server processes.
+# Deploying a Streamlit repo to GitHub Pages results in a blank page.
+# KITTAB should be hosted on Streamlit Community Cloud (free, 1-click connect to this GitHub repo),
+# or deployed as a container to Google Cloud Run, Render, or Railway.
+
+jobs:
+  docker-build:
+    name: Build & Verify Production Container
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Container Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: kittab-app:latest

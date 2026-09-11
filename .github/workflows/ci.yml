@@ -1,0 +1,44 @@
+name: KITTAB CI — Python 3.11 & Streamlit Integrity
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    name: Build & Verify Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libgl1
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate Python Syntax & Import Safety
+        run: |
+          python -m py_compile app.py
+          python -c "import streamlit, openai, chromadb, pypdf; print('All core modules loaded successfully')"
+
+      - name: Smoke Test Streamlit Entrypoint
+        env:
+          OPENAI_API_KEY: "sk-test-ci-key-placeholder"
+        run: |
+          python -c "from pathlib import Path; assert Path('app.py').exists(), 'app.py entrypoint missing!'"
+          python -c "from pathlib import Path; assert Path('.streamlit/config.toml').exists(), 'Streamlit config missing!'"

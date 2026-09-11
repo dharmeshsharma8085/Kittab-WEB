@@ -1,0 +1,22 @@
+# KITTAB - Python 3.11 Production Dependencies
+# Pinned to stable, mutually compatible versions to prevent installation crashes on Streamlit Cloud & Linux containers
+
+streamlit>=1.35.0,<2.0.0
+openai>=1.30.0,<2.0.0
+chromadb>=0.4.24,<0.6.0
+pypdf2>=3.0.1
+beautifulsoup4>=4.12.3
+yt-dlp>=2024.4.9
+pillow>=10.2.0
+pandas>=2.2.0
+numpy>=1.26.0,<2.0.0
+requests>=2.31.0
+python-dotenv>=1.0.1
+
+# Headless OpenCV (essential for headless servers without X11/libGL)
+opencv-python-headless>=4.9.0.80
+
+# NLP & Machine Learning utilities
+sentence-transformers>=2.7.0; extra == 'full'
+easyocr>=1.7.1; extra == 'full'
+openai-whisper>=20231117; extra == 'full'
