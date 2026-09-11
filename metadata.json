@@ -1,0 +1,6 @@
+{
+  "name": "KITTAB - Multimodal AI Learning Assistant",
+  "description": "Multimodal Agentic RAG Learning Assistant that turns notes, PDFs, audio, video, and websites into structured knowledge, summaries, flashcards, tests, and interactive chat.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
